@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mahiru Cake Creations</title>
+
+<style>
+body {
+    font-family: Arial;
+    margin: 0;
+    background: #f5faff;
+}
+
+header {
+    background: linear-gradient(90deg,#4da6ff,#ff80bf);
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.logo {
+    width: 100px;
+    border-radius: 50%;
+}
+
+.container {
+    padding: 20px;
+}
+
+.cakes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 15px;
+}
+
+.card {
+    background: white;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.card img:hover {
+    transform: scale(1.1);
+}
+
+button {
+    background: #4da6ff;
+    color: white;
+    border: none;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.cart {
+    background: white;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 12px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <img src="logo.jpg" class="logo">
+    <h1>Mahiru Cake Creations</h1>
+    <p>Owner: Chathurika | 📍 Kandy</p>
+</header>
+
+<div class="container">
+
+<h2>🍰 Cakes Menu</h2>
+
+<div class="cakes">
+
+<div class="card">
+    <img src="https://via.placeholder.com/300">
+    <h3>Vanilla Cake 1kg</h3>
+    <p>Rs. 1800</p>
+    <button onclick="add('Vanilla Cake',1800)">Add to Cart</button>
+</div>
+
+<div class="card">
+    <img src="https://via.placeholder.com/300">
+    <h3>Chocolate Cake 1kg</h3>
+    <p>Rs. 2000</p>
+    <button onclick="add('Chocolate Cake',2000)">Add to Cart</button>
+</div>
+
+</div>
+
+<div class="cart">
+<h2>🛒 Cart</h2>
+<ul id="list"></ul>
+<h3>Total: Rs. <span id="total">0</span></h3>
+
+<button onclick="checkout()">Order via WhatsApp</button>
+</div>
+
+</div>
+
+<script>
+let cart = [];
+let total = 0;
+
+function add(name, price){
+    cart.push(name + " - Rs." + price);
+    total += price;
+    update();
+}
+
+function update(){
+    document.getElementById("list").innerHTML =
+    cart.map(i => "<li>"+i+"</li>").join("");
+    document.getElementById("total").innerText = total;
+}
+
+function checkout(){
+    let msg = "Hello I want to order:%0A" + cart.join("%0A") + "%0ATotal: Rs." + total;
+    window.open("https://wa.me/94778996190?text=" + msg);
+}
+</script>
+
+</body>
+</html>
